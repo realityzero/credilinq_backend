@@ -10,7 +10,8 @@ import {
 import { SmehealthchecksService } from './smehealthchecks.service';
 import { CreateSmehealthcheckDto } from './dto/create-smehealthcheck.dto';
 import { UpdateSmehealthcheckDto } from './dto/update-smehealthcheck.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { SmehealthcheckEntity } from './entities/smehealthcheck.entity';
 
 @Controller('smehealthchecks')
 @ApiTags('smehealthchecks')
@@ -20,11 +21,13 @@ export class SmehealthchecksController {
   ) {}
 
   @Post()
+  @ApiCreatedResponse({ type: SmehealthcheckEntity })
   create(@Body() createSmehealthcheckDto: CreateSmehealthcheckDto) {
     return this.smehealthchecksService.create(createSmehealthcheckDto);
   }
 
   @Get()
+  @ApiOkResponse({ type: SmehealthcheckEntity, isArray: true })
   findAll() {
     return this.smehealthchecksService.findAll();
   }
