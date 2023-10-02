@@ -32,9 +32,10 @@ export class SmehealthchecksController {
     return this.smehealthchecksService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.smehealthchecksService.findOne(+id);
+  @Get(':phone')
+  @ApiOkResponse({ type: SmehealthcheckEntity })
+  findOne(@Param('phone') phone: string) {
+    return this.smehealthchecksService.findOne(phone);
   }
 
   @Patch(':id')

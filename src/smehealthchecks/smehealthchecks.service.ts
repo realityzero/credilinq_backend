@@ -38,8 +38,11 @@ export class SmehealthchecksService {
     // return `This action returns all smehealthchecks`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} smehealthcheck`;
+  findOne(phone: string) {
+    return this.prisma.smeHealthcheck.findFirstOrThrow({
+      where: { phone: `+65${phone}` },
+    });
+    // return `This action returns a #${id} smehealthcheck`;
   }
 
   update(id: number, updateSmehealthcheckDto: UpdateSmehealthcheckDto) {
