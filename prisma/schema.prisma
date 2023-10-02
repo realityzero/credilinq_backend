@@ -5,5 +5,19 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model SmeHealthcheck {
+  id                    Int        @id @default(autoincrement())
+  created_at            DateTime   @default(now())
+  updated_at            DateTime   @updatedAt
+  company_uen           String     @db.VarChar(10)
+  company_name          String     @db.VarChar(250)
+  full_name             String     @db.VarChar(250)
+  position_within_company String     @db.VarChar(250)
+  email                 String     @db.VarChar(250)
+  phone                 String     @db.VarChar(11)
+  documents             Json
 }
