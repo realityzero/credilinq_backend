@@ -10,8 +10,10 @@ import {
 import { SmehealthchecksService } from './smehealthchecks.service';
 import { CreateSmehealthcheckDto } from './dto/create-smehealthcheck.dto';
 import { UpdateSmehealthcheckDto } from './dto/update-smehealthcheck.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('smehealthchecks')
+@ApiTags('smehealthchecks')
 export class SmehealthchecksController {
   constructor(
     private readonly smehealthchecksService: SmehealthchecksService,

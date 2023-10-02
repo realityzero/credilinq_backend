@@ -10,6 +10,11 @@ export class Document {
 
 @ApiExtraModels(Document)
 export class CreateSmehealthcheckDto {
+  // Probably wrong way to do created_at and updated_at
+  created_at: Date = new Date();
+
+  updated_at: Date = new Date();
+
   @ApiProperty()
   company_uen: string;
 
