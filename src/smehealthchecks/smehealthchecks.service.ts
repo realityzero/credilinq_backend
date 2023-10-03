@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateSmehealthcheckDto } from './dto/create-smehealthcheck.dto';
-import { UpdateSmehealthcheckDto } from './dto/update-smehealthcheck.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
@@ -35,21 +34,11 @@ export class SmehealthchecksService {
 
   findAll() {
     return this.prisma.smeHealthcheck.findMany();
-    // return `This action returns all smehealthchecks`;
   }
 
   findOne(phone: string) {
     return this.prisma.smeHealthcheck.findFirst({
       where: { phone: `+65${phone}` },
     });
-    // return `This action returns a #${id} smehealthcheck`;
-  }
-
-  update(id: number, updateSmehealthcheckDto: UpdateSmehealthcheckDto) {
-    return `This action updates a #${id} smehealthcheck`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} smehealthcheck`;
   }
 }
