@@ -18,6 +18,6 @@ model SmeHealthcheck {
   full_name             String     @db.VarChar(250)
   position_within_company String     @db.VarChar(250)
   email                 String     @db.VarChar(250)
-  phone                 String     @db.VarChar(11)
+  phone                 String     @db.VarChar(11) @unique
   documents             Json
 }
