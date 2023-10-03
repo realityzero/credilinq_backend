@@ -7,6 +7,17 @@ import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-cl
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // not recommended. only done to allow different frontend domain.
+  app.use((req, res, next) => {
+    res.header(
+      'Access-Control-Allow-Origin',
+      'https://sme-healthcheck.vercel.app',
+    );
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  });
+
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
