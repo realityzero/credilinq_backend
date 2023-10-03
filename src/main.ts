@@ -8,14 +8,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // not recommended. only done to allow different frontend domain.
-  app.use((req, res, next) => {
-    res.header(
-      'Access-Control-Allow-Origin',
+  app.enableCors({
+    origin: [
       'https://sme-healthcheck.vercel.app',
-    );
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    next();
+      'https://credilinq-backend.onrender.com',
+    ],
+    methods: ['POST', 'PUT', 'DELETE', 'GET', 'PATCH'],
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
