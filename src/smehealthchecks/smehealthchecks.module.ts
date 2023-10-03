@@ -7,5 +7,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
   controllers: [SmehealthchecksController],
   providers: [SmehealthchecksService],
   imports: [PrismaModule],
+  exports: [SmehealthchecksService],
 })
 export class SmehealthchecksModule {}

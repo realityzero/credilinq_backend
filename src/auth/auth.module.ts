@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
 import { JwtStrategy } from './jwt.strategy';
+import { SmehealthchecksModule } from 'src/smehealthchecks/smehealthchecks.module';
 
 export const jwtSecret = process.env.JWT_SECRET;
 
@@ -18,6 +19,7 @@ export const jwtSecret = process.env.JWT_SECRET;
       signOptions: { expiresIn: '7d' },
     }),
     UsersModule,
+    SmehealthchecksModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

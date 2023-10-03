@@ -5,11 +5,18 @@ import {
   Body,
   Param,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { SmehealthchecksService } from './smehealthchecks.service';
 import { CreateSmehealthcheckDto } from './dto/create-smehealthcheck.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { SmehealthcheckEntity } from './entities/smehealthcheck.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('smehealthchecks')
 @ApiTags('smehealthchecks')
@@ -25,12 +32,16 @@ export class SmehealthchecksController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: SmehealthcheckEntity, isArray: true })
   async findAll() {
     return await this.smehealthchecksService.findAll();
   }
 
   @Get(':phone')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: SmehealthcheckEntity })
   async findOne(@Param('phone') phone: string) {
     const healthcheckData = await this.smehealthchecksService.findOne(phone);
