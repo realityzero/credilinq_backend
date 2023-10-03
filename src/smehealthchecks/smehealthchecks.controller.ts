@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { SmehealthchecksService } from './smehealthchecks.service';
 import { CreateSmehealthcheckDto } from './dto/create-smehealthcheck.dto';
@@ -28,14 +29,20 @@ export class SmehealthchecksController {
 
   @Get()
   @ApiOkResponse({ type: SmehealthcheckEntity, isArray: true })
-  findAll() {
-    return this.smehealthchecksService.findAll();
+  async findAll() {
+    return await this.smehealthchecksService.findAll();
   }
 
   @Get(':phone')
   @ApiOkResponse({ type: SmehealthcheckEntity })
-  findOne(@Param('phone') phone: string) {
-    return this.smehealthchecksService.findOne(phone);
+  async findOne(@Param('phone') phone: string) {
+    const healthcheckData = await this.smehealthchecksService.findOne(phone);
+    if (!healthcheckData) {
+      throw new NotFoundException(
+        `Healthcheck Data with ${phone} does not exist.`,
+      );
+    }
+    return healthcheckData;
   }
 
   @Patch(':id')

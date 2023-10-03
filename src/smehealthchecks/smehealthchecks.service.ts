@@ -39,7 +39,7 @@ export class SmehealthchecksService {
   }
 
   findOne(phone: string) {
-    return this.prisma.smeHealthcheck.findFirstOrThrow({
+    return this.prisma.smeHealthcheck.findFirst({
       where: { phone: `+65${phone}` },
     });
     // return `This action returns a #${id} smehealthcheck`;
