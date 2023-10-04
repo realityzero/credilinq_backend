@@ -1,3 +1,22 @@
+## Notes from Author
+- SME Healthcheck backend apis are deployed using [Render](https://render.com/)
+- Render is susceptible to cold start issue, it is recommended to open api spec/swagger first. Usually takes 1-2 mins.
+- [Backend swagger link](https://credilinq-backend.onrender.com/api)
+- Frontend is depoyed at Vercel, [Click Me](https://sme-healthcheck.vercel.app/)
+- Refer ```.env.example``` file for example env variables
+- Project uses [Prisma](https://www.prisma.io/) as an ORM
+- Postgres database is connected w/ [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres), it suffers from occasional cold starts of 1-2 seconds.
+- UEN is a 9-10 digit number given by Singapore Government e.g. "234323213X". Refer: [What is Unique Entity Number (UEN) in Singapore](https://sleek.com/sg/resources/what-is-uen-in-singapore/)
+- APIs are tested for happy path. There will be some bugs available.
+
+## Instructions to follow for running
+- Open [swagger](https://credilinq-backend.onrender.com/api)
+- `POST smehealthchecks` request is for storing records i.e. used by frontend client and unprotected
+- Remaining endpoints are protected
+- Use endpoint `POST /auth/login` with credentials email: `nishantsikri@gmail.com` and password: `supersecretpassword`. Mainly for demonstration purposes.
+- After login, you'll receive JWT Authorisation token. Copy and paste this token in `Authorize` option at the top of Swagger.
+- Now you can try out other protected apis.
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
